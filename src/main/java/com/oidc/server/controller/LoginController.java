@@ -49,7 +49,7 @@ public class LoginController {
         session.setAttribute("username", user.getUsername());
 
         if (clientId != null && redirectUri != null) {
-            return String.format("redirect:/authorize?client_id=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s",
+            return String.format("redirect:/oidc/authorize?client_id=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s",
                     clientId, redirectUri, scope != null ? scope : "openid profile email", state);
         }
 

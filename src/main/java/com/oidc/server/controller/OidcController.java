@@ -1,15 +1,9 @@
 package com.oidc.server.controller;
 
-import com.oidc.server.dto.TokenResponse;
-import com.oidc.server.dto.UserInfoResponse;
-import com.oidc.server.entity.AuthorizationCode;
 import com.oidc.server.entity.OAuthClient;
-import com.oidc.server.entity.User;
 import com.oidc.server.service.AuthService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -26,9 +20,9 @@ public class OidcController {
     private final AuthService authService;
 
     @GetMapping("/authorize")
-    public String authorize(@RequestParam String clientId,
-                            @RequestParam String redirectUri,
-                            @RequestParam String responseType,
+    public String authorize(@RequestParam(name = "client_id") String clientId,
+                            @RequestParam(name = "redirect_uri") String redirectUri,
+                            @RequestParam(name = "response_type") String responseType,
                             @RequestParam(defaultValue = "openid profile email") String scope,
                             @RequestParam String state,
                             HttpSession session,

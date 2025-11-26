@@ -3,6 +3,7 @@ D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\mai
 D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\repository\UserRepository.java
 D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\config\DataInitializer.java
 D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\entity\OAuthClient.java
+D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\controller\OidcTokenController.java
 D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\entity\AccessToken.java
 D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\util\AuthorizationCodeGenerator.java
 D:\software\develop_tools\git\github\workspace\oidc-security\oidc-server\src\main\java\com\oidc\server\controller\OidcController.java

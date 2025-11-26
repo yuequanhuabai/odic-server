@@ -84,11 +84,11 @@
     <div class="login-container">
         <h1>Login</h1>
         <form method="post" action="/login">
-            <input type="hidden" name="clientId" th:value="${param.clientId}">
-            <input type="hidden" name="redirectUri" th:value="${param.redirectUri}">
+            <input type="hidden" name="clientId" th:value="${param.client_id}">
+            <input type="hidden" name="redirectUri" th:value="${param.redirect_uri}">
             <input type="hidden" name="state" th:value="${param.state}">
             <input type="hidden" name="scope" th:value="${param.scope}">
-            <input type="hidden" name="responseType" th:value="${param.responseType}">
+            <input type="hidden" name="responseType" th:value="${param.response_type}">
 
             <div th:if="${error}" class="error">Invalid username or password</div>
 
