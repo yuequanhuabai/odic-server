@@ -50,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
             OAuthClient client = new OAuthClient();
             client.setClientId("my-app");
             client.setClientSecret("secret123");
-            client.setRedirectUris("http://localhost:5173/callback,http://localhost:3000/callback");
+            client.setRedirectUris("http://localhost:8081/callback,http://localhost:5173/callback,http://localhost:3000/callback");
             client.setClientName("My OIDC Client");
             oauthClientRepository.save(client);
             log.info("✓ Created OAuth2 client");

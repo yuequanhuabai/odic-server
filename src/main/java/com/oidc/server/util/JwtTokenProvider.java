@@ -29,13 +29,13 @@ public class JwtTokenProvider {
 
     public String generateIdToken(Long userId, String username, String email, String clientId) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("user_id", userId);
         claims.put("email", email);
         claims.put("client_id", clientId);
 
         return Jwts.builder()
                 .subject(username)
                 .claims(claims)
-                .claim("sub", userId)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs * 1000))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -45,7 +45,7 @@ public class JwtTokenProvider {
     public String generateRefreshToken(Long userId, String username) {
         return Jwts.builder()
                 .subject(username)
-                .claim("sub", userId)
+                .claim("user_id", userId)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 7 days
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -54,12 +54,12 @@ public class JwtTokenProvider {
 
     private String generateTokenWithClaims(Long userId, String username, String clientId, long expirationMs) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("user_id", userId);
         claims.put("client_id", clientId);
 
         return Jwts.builder()
                 .subject(username)
                 .claims(claims)
-                .claim("sub", userId)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expirationMs * 1000))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -67,7 +67,15 @@ public class JwtTokenProvider {
     }
 
     public Long getUserIdFromToken(String token) {
-        return extractClaim(token, claims -> Long.parseLong(claims.get("sub").toString()));
+        return extractClaim(token, claims -> {
+            Object userIdObj = claims.get("user_id");
+            if (userIdObj instanceof Integer) {
+                return ((Integer) userIdObj).longValue();
+            } else if (userIdObj instanceof Long) {
+                return (Long) userIdObj;
+            }
+            return Long.parseLong(userIdObj.toString());
+        });
     }
 
     public String getUsernameFromToken(String token) {

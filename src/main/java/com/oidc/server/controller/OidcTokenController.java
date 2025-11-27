@@ -17,11 +17,12 @@ public class OidcTokenController {
     private final AuthService authService;
 
     @PostMapping("/token")
-    public ResponseEntity<?> token(@RequestParam String grantType,
+    public ResponseEntity<?> token(@RequestParam("grant_type") String grantType,
                                    @RequestParam(required = false) String code,
-                                   @RequestParam String clientId,
-                                   @RequestParam String clientSecret,
-                                   @RequestParam(required = false) String refreshToken) {
+                                   @RequestParam("redirect_uri") String redirectUri,
+                                   @RequestParam("client_id") String clientId,
+                                   @RequestParam("client_secret") String clientSecret,
+                                   @RequestParam(value = "refresh_token", required = false) String refreshToken) {
 
         if (!"authorization_code".equals(grantType)) {
             log.warn("Unsupported grant type: {}", grantType);
